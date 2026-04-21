@@ -1,0 +1,51 @@
+{
+  "welcomeShown": true,
+  "maxLogsPerEnvironment": 100,
+  "truncateRouteName": true,
+  "mainMenuSize": 191,
+  "secondaryMenuSize": 233,
+  "fakerLocale": "en",
+  "fakerSeed": null,
+  "lastChangelog": "9.3.0",
+  "environments": [
+    {
+      "uuid": "820186eb-b438-4d8e-a06a-4cb7442a0df4",
+      "path": "/Users/edwin.zamora/Library/Application Support/mockoon/storage/demo.json",
+      "cloud": false,
+      "lastServerHash": null
+    },
+    {
+      "uuid": "a5e42b8d-0b6f-461b-b8c0-15e5f87fa6e6",
+      "path": "/Users/edwin.zamora/Library/Application Support/mockoon/storage/otherServer.json",
+      "cloud": false,
+      "lastServerHash": null
+    }
+  ],
+  "disabledRoutes": {},
+  "collapsedFolders": {},
+  "enableTelemetry": true,
+  "storagePrettyPrint": true,
+  "fileWatcherEnabled": "disabled",
+  "dialogWorkingDir": "/Users/edwin.zamora/Library/Application Support/mockoon/storage",
+  "startEnvironmentsOnLoad": false,
+  "logTransactions": false,
+  "environmentsCategoriesOrder": [
+    "local",
+    "cloud"
+  ],
+  "environmentsCategoriesCollapsed": {
+    "local": false,
+    "cloud": false
+  },
+  "envVarsPrefix": "MOCKOON_",
+  "activeEnvironmentUuid": "820186eb-b438-4d8e-a06a-4cb7442a0df4",
+  "enableRandomLatency": false,
+  "recentLocalEnvironments": [
+    {
+      "name": "OtherServer",
+      "path": "/Users/edwin.zamora/Library/Application Support/mockoon/storage/otherServer.json"
+    }
+  ],
+  "displayLogsIsoTimestamp": false,
+  "deployPreferredRegion": null
+}

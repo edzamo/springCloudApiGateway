@@ -1,0 +1,231 @@
+{
+  "uuid": "a5e42b8d-0b6f-461b-b8c0-15e5f87fa6e6",
+  "lastMigration": 33,
+  "name": "OtherServer",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "0c855eda-159f-4e3e-8bd6-1f9d45dfda6b",
+      "type": "crud",
+      "documentation": "",
+      "method": "",
+      "endpoint": "api/categories",
+      "responses": [
+        {
+          "uuid": "110ada6c-85d0-4ce5-83db-be2658b8064d",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "X-Mode-Example",
+              "value": "2"
+            }
+          ],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "m3mx",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "34e97123-b9a8-48a4-9d49-8eff21b12af9",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api/order",
+      "responses": [
+        {
+          "uuid": "20b6b870-aba7-476f-99f3-7ad97e3fc9a5",
+          "body": "{\n  \"orderId\": \"1001\",\n  \"customer\": {\n    \"name\": \"Jane Smith\",\n    \"email\": \"jane@example.com\"\n  },\n  \"items\": [\n    {\n      \"productId\": \"p1\",\n      \"name\": \"Laptop\",\n      \"price\": 999.99\n    },\n    {\n      \"productId\": \"p2\",\n      \"name\": \"Mouse\",\n      \"price\": 25.50\n    }\n  ]\n}\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "2eb49388-2d68-45c3-a3d4-cac41162c96c",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "X-Mode-Example",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "6b8568fa-8c8f-4912-8ade-de2ac91b22ce",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/order",
+      "responses": [
+        {
+          "uuid": "4f44e412-4acf-422f-a6b4-97cc74dce1dd",
+          "body": "{\n    \"orderId\": \"1001\"\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "5b3028e2-6837-4649-b20e-9f20c1339fab",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "{     \"orderId\": \"1001\",     \"customer\": {         \"name\": \"Jane Smith\",         \"email\": \"jane@example.com\"     },     \"items\": [         {             \"productId\": \"p1\",             \"name\": \"Laptop\",             \"price\": 999.99         },         {             \"productId\": \"p2\",             \"name\": \"Mouse\",             \"price\": 25.50         }     ] }",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "0c855eda-159f-4e3e-8bd6-1f9d45dfda6b"
+    },
+    {
+      "type": "route",
+      "uuid": "34e97123-b9a8-48a4-9d49-8eff21b12af9"
+    },
+    {
+      "type": "route",
+      "uuid": "6b8568fa-8c8f-4912-8ade-de2ac91b22ce"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [
+    {
+      "uuid": "d86674ac-8b02-4285-a640-711fd5641c3d",
+      "id": "m3mx",
+      "name": "Categories",
+      "documentation": "",
+      "value": "[\n  {{#repeat 10}}\n    {\n      \"id\": \"{{faker 'string.uuid'}}\",\n      \"name\": \"{{faker 'commerce.department'}}\",\n      \"isCollapsed\": {{faker 'datatype.boolean'}}\n    }\n  {{/repeat}}\n]"
+    }
+  ],
+  "callbacks": []
+}
