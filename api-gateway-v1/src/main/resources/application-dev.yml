@@ -1,0 +1,8 @@
+# Perfil desarrollo local (activo por defecto).
+spring:
+    config:
+        activate:
+            on-profile: dev
+
+# Opcional: aquí puedes sobreescribir gateway.routePaths / gateway.backends solo para dev.
+# Por defecto se usan los valores de application.yml (localhost y paths base).

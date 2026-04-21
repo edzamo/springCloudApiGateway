@@ -1,0 +1,24 @@
+# Perfil producción: define URIs y paths vía variables en el Deployment/Helm (sin credenciales en el repo).
+# Ejemplo de paths ampliados para el servicio "users" sin tocar código Java:
+#   GATEWAY_ROUTE_PATHS_USERS=/api/**,/api/accounts/**,/api/retriever/**
+spring:
+    config:
+        activate:
+            on-profile: prod
+    logging:
+        level:
+            root: WARN
+            com.ezamora.api_gateway_v1: INFO
+            org.springframework.cloud.gateway.handler.RoutePredicateHandlerMapping: INFO
+
+gateway:
+    backends:
+        orders: ${GATEWAY_BACKEND_ORDERS_URI}
+        users: ${GATEWAY_BACKEND_USERS_URI}
+    routePaths:
+        orders: ${GATEWAY_ROUTE_PATHS_ORDERS:/api/order,/api/order/**}
+        # En prod suele hacer falta enrutar varios prefijos al mismo backend:
+        users: ${GATEWAY_ROUTE_PATHS_USERS:/api/**,/api/accounts/**,/api/retriever/**}
+    routeMethods:
+        orders: ${GATEWAY_ROUTE_METHODS_ORDERS:GET,POST}
+        users: ${GATEWAY_ROUTE_METHODS_USERS:GET,POST}

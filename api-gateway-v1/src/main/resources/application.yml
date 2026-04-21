@@ -1,0 +1,58 @@
+server:
+    port: ${SERVER_PORT:8020}
+
+# Perfil por defecto: dev (application-dev.yml). Producción: --spring.profiles.active=prod
+spring:
+    profiles:
+        default: dev
+    application:
+        name: api-gateway-v1
+    cloud:
+        gateway:
+            server:
+                webflux:
+                    routes:
+                        - id: api-backend-orders
+                          uri: ${gateway.backends.orders}
+                          metadata:
+                              strategyByMethod:
+                                  POST: RSA
+                                  GET: AES
+                          predicates:
+                              # Patrones Path externalizados: añade /api/accounts, etc. vía gateway.routePaths.orders o GATEWAY_ROUTE_PATHS_ORDERS
+                              - Path=${gateway.routePaths.orders}
+                              - Method=${gateway.routeMethods.orders}
+                        - id: api-backend-users
+                          uri: ${gateway.backends.users}
+                          metadata:
+                              routeStrategy: AES
+                          predicates:
+                              - Path=${gateway.routePaths.users}
+                              - Method=${gateway.routeMethods.users}
+
+    logging:
+        level:
+            root: INFO
+            com.ezamora.api_gateway_v1: INFO
+            org.springframework.cloud.gateway.handler.RoutePredicateHandlerMapping: DEBUG
+
+api-gateway:
+    body-encryption:
+        aes-secret: ${API_GATEWAY_AES_SECRET:01234567890123456789012345678901}
+
+# --- Backends (URIs) ---
+gateway:
+    backends:
+        orders: ${GATEWAY_BACKEND_ORDERS_URI:http://localhost:3001}
+        users: ${GATEWAY_BACKEND_USERS_URI:http://localhost:3000}
+
+    # --- Predicados Path (coma = varios patrones en una sola ruta; mismo orden que en SCG) ---
+    # Sustituible por perfil (application-prod.yml) o por env: GATEWAY_ROUTE_PATHS_USERS, etc.
+    routePaths:
+        orders: ${GATEWAY_ROUTE_PATHS_ORDERS:/api/order,/api/order/**}
+        users: ${GATEWAY_ROUTE_PATHS_USERS:/api/**}
+
+    # Métodos HTTP permitidos por ruta (lista separada por coma para el predicado Method)
+    routeMethods:
+        orders: ${GATEWAY_ROUTE_METHODS_ORDERS:GET,POST}
+        users: ${GATEWAY_ROUTE_METHODS_USERS:GET,POST}

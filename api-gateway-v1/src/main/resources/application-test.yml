@@ -1,0 +1,10 @@
+# Perfil test (CI, integración): otros hosts por defecto; paths igual que base salvo que definas env.
+spring:
+    config:
+        activate:
+            on-profile: test
+
+gateway:
+    backends:
+        orders: ${GATEWAY_BACKEND_ORDERS_URI:http://localhost:3101}
+        users: ${GATEWAY_BACKEND_USERS_URI:http://localhost:3100}
